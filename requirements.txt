@@ -2,4 +2,4 @@ discord
 pytube
 ffmpeg
 mega.py
-dotenv
+python-dotenv
