@@ -104,8 +104,6 @@ def get_func(message,yt):
     main_folder = new_mega.find('discord_videos')
     file = new_mega.upload(f"./videos/down_{message.author}", main_folder[0])
     os.remove(f"./videos/down_{message.author}")
-    
-    print(f"processed {message.author}")
 
     client.loop.create_task(message.reply(f"File is only valid for {delete_time//3600} hour(s), link : {new_mega.get_upload_link(file)}"))
 
