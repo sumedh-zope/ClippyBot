@@ -1,11 +1,8 @@
 import os,discord,pytube
-from discord.utils import get
 from dotenv import load_dotenv
 from mega import Mega
-import _thread as trd
 import threading
 import time
-import asyncio
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -32,6 +29,7 @@ async def on_message(message):
     clean_content = message.content.split(' ')
 
     if clean_content[0] == "!ping": #respond command to test bot
+        
         await message.reply("PONG")
 
     if clean_content[0] == "!get": #Get complete video (!get link) 
@@ -93,7 +91,7 @@ async def on_message(message):
             await message.channel.send(f"Some error occured :(")
             return
 
-def test_func(file):
+def delete_file_func(file):
     time.sleep(delete_time)
     new_mega.delete(f"{new_mega.get_id_from_obj(file)}")
 
@@ -118,7 +116,7 @@ def clip_func(message, yt, start_time, end_time):
     os.remove(f"./videos/down_{message.author}")
     os.remove(f"./videos/down_{message.author}_temp.mp4")
     
-    delete_thread = threading.Thread(target=test_func, args=(file))
+    delete_thread = threading.Thread(target=delete_file_func, args=(file))
     delete_thread.start()
 
     client.loop.create_task(message.reply(f"File is only valid for {delete_time//3600} hour(s), link : {new_mega.get_upload_link(file)}")) 
