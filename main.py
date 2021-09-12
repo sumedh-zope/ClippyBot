@@ -103,6 +103,9 @@ def get_func(message,yt):
     file = new_mega.upload(f"./videos/down_{message.author}", main_folder[0])
     os.remove(f"./videos/down_{message.author}")
 
+    delete_thread = threading.Thread(target=test_func, args=(file))
+    delete_thread.start()
+    
     client.loop.create_task(message.reply(f"File is only valid for {delete_time//3600} hour(s), link : {new_mega.get_upload_link(file)}"))
 
 def clip_func(message, yt, start_time, end_time):
