@@ -91,6 +91,14 @@ async def on_message(message):
             await message.channel.send(f"Some error occured :(")
             return
 
+    if clean_content[0] == "!help":
+
+        f = open('./help.txt','r')
+        help_text = f.read()
+        client.loop.create_task(message.reply(help_text)) 
+        f.close()
+        
+
 def delete_file_func(file):
     time.sleep(delete_time)
     new_mega.delete(f"{new_mega.get_id_from_obj(file)}")
@@ -103,7 +111,7 @@ def get_func(message,yt):
     file = new_mega.upload(f"./videos/down_{message.author}", main_folder[0])
     os.remove(f"./videos/down_{message.author}")
 
-    delete_thread = threading.Thread(target=test_func, args=(file))
+    delete_thread = threading.Thread(target=delete_file_func, args=(file,))
     delete_thread.start()
     
     client.loop.create_task(message.reply(f"File is only valid for {delete_time//3600} hour(s), link : {new_mega.get_upload_link(file)}"))
@@ -119,7 +127,7 @@ def clip_func(message, yt, start_time, end_time):
     os.remove(f"./videos/down_{message.author}")
     os.remove(f"./videos/down_{message.author}_temp.mp4")
     
-    delete_thread = threading.Thread(target=delete_file_func, args=(file))
+    delete_thread = threading.Thread(target=delete_file_func, args=(file,))
     delete_thread.start()
 
     client.loop.create_task(message.reply(f"File is only valid for {delete_time//3600} hour(s), link : {new_mega.get_upload_link(file)}")) 

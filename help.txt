@@ -1,0 +1,6 @@
+Hey, I am Clippy bot, you can use me to download and clip youtube videos.
+Commands supported:
+1. !ping -> check whether the bot is working, the bot replies with PONG
+2. !get -> download a youtube video directly // syntax -> !get [youtube link]
+3. !clip -> download a clipped video // syntax -> !clip [start_time] [end_time] [youtube link]
+4. !help -> Help command for the bot.
